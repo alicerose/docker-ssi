@@ -1,0 +1,11 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ./docker/web
+      dockerfile: dockerfile
+    volumes:
+      - ./.data/log/:/var/log/apache2/
+      - ./www/:/var/www/html
+    ports:
+      - 8080:80

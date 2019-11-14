@@ -1,0 +1,12 @@
+FROM php:7.2.10-apache
+
+COPY ./php/php.ini /usr/local/etc/php/
+
+RUN apt-get update \
+  && apt-get install -y vim libfreetype6-dev libjpeg62-turbo-dev libpng-dev libmcrypt-dev libicu-dev zip unzip \
+  && docker-php-ext-install intl pdo pdo_mysql mbstring exif gd \
+  && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+  && docker-php-ext-install -j$(nproc) gd
+
+RUN a2enmod rewrite include headers
+COPY ./apache2/sites-available/000-default.conf /etc/apache2/sites-available/

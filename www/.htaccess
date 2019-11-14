@@ -1,0 +1,11 @@
+SSILegacyExprParser on
+
+Options +Includes
+AddType application/x-httpd-php html
+AddOutputFilter INCLUDES .html
+
+DirectoryIndex index.html
+Options -MultiViews
+
+php_value post_max_filesize 8M
+php_value upload_max_filesize 5M
